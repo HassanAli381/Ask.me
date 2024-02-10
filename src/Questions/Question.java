@@ -12,6 +12,8 @@ public class Question {
     private User sender;
     private boolean isAnswered = false;
 
+    public Question() {}
+
     public Question(int id, String question, User receiver, User sender) {
         this.id = id;
         this.question = question;
@@ -63,9 +65,10 @@ public class Question {
         this.sender = sender;
     }
 
-    public static Question makeQuestion(Scanner sc) {
+    public Question makeQuestion(Scanner sc) {
         System.out.println("Enter question id");
         int id = sc.nextInt();
+
         // check if this id exists before
         if(QuestionsRetrieval.getquestion(id) != null) {
             System.out.println("there is a question with this id, please choose another id");

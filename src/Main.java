@@ -11,6 +11,7 @@ public class Main {
         generatedUsers.generate();
         Scanner sc = new Scanner(System.in);
         Menu menu = new Menu();
+        UserController userController = new UserController();
         while(true) {
             menu.showMenu();
             int choice = sc.nextInt();
@@ -41,7 +42,8 @@ public class Main {
                 String password = sc.next();
 
                 User user = new User(id, age, name, password);
-                UserAuth.registerUser(user);
+                UserAuth userAuth = new UserAuth(user);
+                userAuth.registerUser(user);
             }
             else if(choice == 2) {
                 //check if there is a user currently logged in
@@ -55,7 +57,8 @@ public class Main {
                 int id = sc.nextInt();
                 System.out.println("Enter password");
                 String password = sc.next();
-                UserAuth.loginUser(id, password);
+                UserAuth userAuth = new UserAuth();
+                userAuth.loginUser(id, password);
             }
             else if(choice == 3) {
                 // get active user
@@ -83,7 +86,7 @@ public class Main {
 
                 System.out.println("Enter receiver id");
                 int id = sc.nextInt();
-                UserController.sendQuestion(Data.loggedInUser, id);
+                userController.sendQuestion(Data.loggedInUser, id);
             }
             else if(choice == 6) {
                 // Answer Question
@@ -95,7 +98,7 @@ public class Main {
                     continue;
                 }
 
-                UserController.AnswerQuestion(Data.loggedInUser);
+                userController.AnswerQuestion(Data.loggedInUser);
             }
             else if(choice == 7) {
                 // show feed
@@ -107,8 +110,8 @@ public class Main {
                     System.out.println("You must be logged in to be able to log out");
                     continue;
                 }
-                System.out.println("Logged out successfully");
                 System.out.println("Hope to see you soon, " + Data.loggedInUser.getName() + ":)");
+                System.out.println("Logged out successfully");
                 Data.loggedInUser = null;
             }
             else if(choice == 9) {

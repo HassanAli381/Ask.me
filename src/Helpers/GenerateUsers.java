@@ -37,9 +37,11 @@ public class GenerateUsers {
     }
 
     public void generate() {
+        Data data = new Data();
+        User curUser = null;
         for(int i = 0; i < this.sz; i++) {
-            User curUser = new User(ids[i], ages[i], names[i], passwords[i]);
-            Data.addUser(curUser);
+            curUser = new User(ids[i], ages[i], names[i], passwords[i]);
+            data.addUser(curUser);
         }
 
     }

@@ -10,6 +10,9 @@ public class Data {
     private static ArrayList<User> users = new ArrayList<>();
     private static ArrayList<Question> questions = new ArrayList<>();
 
+    public Data() {
+    }
+
     public static ArrayList<User> getUsers() {
         return users;
     }
@@ -18,11 +21,11 @@ public class Data {
         return questions;
     }
 
-    public static void addUser(User newUser) {
+    public void addUser(User newUser) {
         users.add(newUser);
     }
 
-    public static void addQuestion(Question newQuestion) {
+    public void addQuestion(Question newQuestion) {
         questions.add(newQuestion);
     }
 }

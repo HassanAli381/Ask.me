@@ -7,15 +7,19 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 public class UserController {
+    Data data;
+    Question question;
+    public UserController() {}
 
-    public static void sendQuestion(User sender, int receiverID) {
+    public void sendQuestion(User sender, int receiverID) {
         User receiver = UsersRetrieval.getUser(receiverID);
         if(receiver == null) {
             System.out.println("No Such User! please try again.");
             return ;
         }
 
-        Question question = Question.makeQuestion(new Scanner(System.in));
+        question = new Question();
+        question = question.makeQuestion(new Scanner(System.in));
         if (question == null)
             return ;
 
@@ -26,12 +30,12 @@ public class UserController {
         receiver.unAnsweredQuestions.add(question.getId());
 
         sender.sentQuestions.add(question);
-
-        Data.addQuestion(question);
+        data = new Data();
+        data.addQuestion(question);
         System.out.println("Question Sent successfully!");
     }
 
-    public static void ShowUnAnsweredQuestions(HashSet<Integer> unansweredQuestions) {
+    public void ShowUnAnsweredQuestions(HashSet<Integer> unansweredQuestions) {
         for(int id : unansweredQuestions) {
             Question question = QuestionsRetrieval.getquestion(id);
             assert question != null;
@@ -40,14 +44,14 @@ public class UserController {
         }
     }
 
-    public static void AnswerQuestion(User user) {
+    public void AnswerQuestion(User user) {
         HashSet<Integer> unansweredQuestions = user.unAnsweredQuestions;
         if(unansweredQuestions.isEmpty()) {
             System.out.println("Your questions inbox is empty!");
             return ;
         }
 
-        ShowUnAnsweredQuestions(unansweredQuestions);
+        this.ShowUnAnsweredQuestions(unansweredQuestions);
 
         System.out.println("Enter question id");
         Scanner sc = new Scanner(System.in);

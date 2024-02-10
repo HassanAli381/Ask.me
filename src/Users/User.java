@@ -15,6 +15,8 @@ public class User {
     ArrayList<Question> sentQuestions;
     ArrayList<Question> receivedQuestions;
 
+    public User() {}
+
     public User(int id, int age, String name, String password) {
         this.id = id;
         this.age = age;
